@@ -6,11 +6,12 @@ DEST_DIR="/mnt/data/audit/$(hostname)"
 LOG_PATTERN="audit.log.*"
 TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
 ARCHIVE_NAME="audit_logs_$TIMESTAMP.tar.gz"
-PERMISSIONS="740"
+PERMISSIONS="700"
+ACTUAL_MOUNT_POINT="/mnt/data"
 
 # --- Safety Checks ---
-if ! mountpoint -q /mnt/data/; then
-    echo "Error: Network drive not mounted. Aborting." >&2
+if ! mountpoint -q $ACTUAL_MOUNT_POINT; then
+    echo "Error: Target drive not mounted. Aborting." >&2
     exit 1
 fi
 
